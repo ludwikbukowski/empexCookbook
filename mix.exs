@@ -43,6 +43,7 @@ defmodule RealWorld.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, "~> 0.13.3"},
       {:absinthe, "~> 1.4.0"},
+      {:absinthe_plug, "~> 1.4"},
       {:gettext, "~> 0.11"},
       {:proper_case, "~> 1.0.0"},
       {:cowboy, "~> 1.1"},

@@ -17,6 +17,9 @@ defmodule RealWorldWeb.Router do
 
   scope "/", RealWorldWeb do
     pipe_through(:api)
+    #        forward "/graphiql", Absinthe.Plug.GraphiQL, schema: DxPlatformWeb.Schema
+
+    #        forward "/graphql/schema", DxPlatformWeb.Plugs.APIDoc
 
     get("/articles/feed", ArticleController, :feed)
     get("/recipes/feed", RecipeController, :feed)
@@ -45,10 +48,10 @@ defmodule RealWorldWeb.Router do
     post("/profiles/:username/follow", ProfileController, :follow)
     delete("/profiles/:username/follow", ProfileController, :unfollow)
 
-
     ## Custom changes
     get("/recipes", RecipeController, :index)
-
-
   end
+
+  forward("/api", Absinthe.Plug, schema: RealWorldWeb.Schema)
+  forward("/graphiql", Absinthe.Plug.GraphiQL, schema: RealWorldWeb.Schema)
 end

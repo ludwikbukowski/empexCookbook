@@ -17,17 +17,14 @@ defmodule RealWorld.Blog.Recipe do
     field(:title, :string)
     field(:slug, :string)
 
-    embeds_many :ingredients, Ingredient
+    embeds_many(:ingredients, Ingredient)
 
     belongs_to(:author, User, foreign_key: :user_id)
 
     timestamps(inserted_at: :created_at)
   end
 
-
-
   def changeset(%Recipe{} = recipe, attrs) do
-  IO.inspect attrs
     recipe
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> cast_embed(:ingredients)

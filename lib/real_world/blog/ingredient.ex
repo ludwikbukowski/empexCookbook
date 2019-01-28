@@ -4,15 +4,14 @@ defmodule RealWorld.Blog.Ingredient do
   """
 
   use Ecto.Schema
-import Ecto.Changeset
+  import Ecto.Changeset
 
   embedded_schema do
-    field :name, :string
+    field(:name, :string)
   end
 
-    def changeset(schema, params) do
-      schema
-      |> cast(params, [:name])
-    end
-
+  def changeset(schema, params) do
+    schema
+    |> cast(params, [:name])
+  end
 end

@@ -15,9 +15,9 @@ defmodule RealWorldWeb.RecipeView do
 
   def render("recipe.json", %{recipe: recipe}) do
     ingredients =
-    recipe
-    |> Map.fetch!(:ingredients)
-    |> Enum.map(fn %{name: n} -> n end)
+      recipe
+      |> Map.fetch!(:ingredients)
+      |> Enum.map(fn %{name: n} -> n end)
 
     recipe
     |> Map.from_struct()
@@ -42,6 +42,4 @@ defmodule RealWorldWeb.RecipeView do
     |> Map.put(:microsecond, {elem(datetime.microsecond, 0), 3})
     |> DateTime.to_iso8601()
   end
-
-
 end
