@@ -6,7 +6,7 @@ defmodule RealWorld.Blog do
   import Ecto.Query, warn: false
   alias RealWorld.Repo
   alias RealWorld.Accounts.{User, UserFollower}
-  alias RealWorld.Blog.{Article, Comment, Favorite}
+  alias RealWorld.Blog.{Article, Recipe, Comment, Favorite}
 
   @default_article_pagination_limit 10
 
@@ -19,11 +19,18 @@ defmodule RealWorld.Blog do
       [%Article{}, ...]
 
   """
-  def list_articles(params) do
+#  def list_articles(params) do
+#    limit = params["limit"] || @default_article_pagination_limit
+#    offset = params["offset"] || 0
+#    from(a in Article, limit: ^limit, offset: ^offset, order_by: a.created_at)
+#      |> filter_by_tags(params["tag"])
+#      |> Repo.all
+#  end
+
+  def list_recipes(params) do
     limit = params["limit"] || @default_article_pagination_limit
     offset = params["offset"] || 0
-    from(a in Article, limit: ^limit, offset: ^offset, order_by: a.created_at)
-      |> filter_by_tags(params["tag"])
+    from(a in Recipe, limit: ^limit, offset: ^offset, order_by: a.created_at)
       |> Repo.all
   end
 
@@ -38,7 +45,7 @@ defmodule RealWorld.Blog do
   def feed(user) do
     query =
       from(
-        a in Article,
+        a in Recipe,
         join: uf in UserFollower,
         on: a.user_id == uf.followee_id,
         where: uf.user_id == ^user.id
@@ -47,6 +54,8 @@ defmodule RealWorld.Blog do
     query
     |> Repo.all()
   end
+
+
 
   def list_tags do
     Ecto.Adapters.SQL.query!(Repo, "select count(*) as tag_count, ut.tag
@@ -70,11 +79,32 @@ defmodule RealWorld.Blog do
       ** (Ecto.NoResultsError)
 
   """
-  def get_article!(id), do: Repo.get!(Article, id)
+#  def get_article!(id), do: Repo.get!(Article, id)
 
-  def get_article_by_slug!(slug), do: Repo.get_by!(Article, slug: slug)
+#  def get_article_by_slug!(slug), do: Repo.get_by!(Article, slug: slug)
 
   @doc """
+  Creates a recipe.
+
+  ## Examples
+
+      iex> create_recipe(%{field: value})
+      {:ok, %Article{}}
+
+      iex> create_recipe(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_recipe(attrs \\ %{}) do
+    %Recipe{}
+    |> Recipe.changeset(attrs)
+    |> Repo.insert()
+  end
+
+
+  def get_recipe_by_slug!(slug), do: Repo.get_by!(Recipe, slug: slug)
+
+ @doc """
   Creates a article.
 
   ## Examples
@@ -86,11 +116,11 @@ defmodule RealWorld.Blog do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_article(attrs \\ %{}) do
-    %Article{}
-    |> Article.changeset(attrs)
-    |> Repo.insert()
-  end
+#  def create_article(attrs \\ %{}) do
+#    %Article{}
+#    |> Article.changeset(attrs)
+#    |> Repo.insert()
+#  end
 
   @doc """
   Updates a article.
@@ -104,11 +134,11 @@ defmodule RealWorld.Blog do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_article(%Article{} = article, attrs) do
-    article
-    |> Article.changeset(attrs)
-    |> Repo.update()
-  end
+#  def update_article(%Article{} = article, attrs) do
+#    article
+#    |> Article.changeset(attrs)
+#    |> Repo.update()
+#  end
 
   @doc """
   Deletes a Article.
@@ -122,13 +152,13 @@ defmodule RealWorld.Blog do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_article(slug) do
-    case Article |> Repo.get_by(slug: slug) do
+  def delete_recipe(slug) do
+    case Recipe |> Repo.get_by(slug: slug) do
       nil ->
         false
 
-      article ->
-        Repo.delete(article)
+      recipe ->
+        Repo.delete(recipe)
     end
   end
 

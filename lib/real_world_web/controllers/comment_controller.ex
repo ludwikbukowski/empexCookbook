@@ -10,8 +10,8 @@ defmodule RealWorldWeb.CommentController do
   plug(Guardian.Plug.EnsureAuthenticated when action in [:create, :update, :delete])
 
   def index(conn, %{"article_id" => slug}, _user) do
-    article = Blog.get_article_by_slug!(slug)
-    comments = Blog.list_comments(article)
+    recipe = Blog.get_recipe_by_slug!(slug)
+    comments = Blog.list_comments(recipe)
 
     comments =
       comments
@@ -21,7 +21,7 @@ defmodule RealWorldWeb.CommentController do
   end
 
   def create(conn, %{"article_id" => slug, "comment" => comment_params}, user) do
-    article = Blog.get_article_by_slug!(slug)
+    article = Blog.get_recipe_by_slug!(slug)
 
     with {:ok, %Comment{} = comment} <-
            Blog.create_comment(

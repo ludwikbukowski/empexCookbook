@@ -19,8 +19,13 @@ defmodule RealWorldWeb.Router do
     pipe_through(:api)
 
     get("/articles/feed", ArticleController, :feed)
+    get("/recipes/feed", RecipeController, :feed)
 
     resources "/articles", ArticleController, except: [:new, :edit] do
+      resources("/comments", CommentController, except: [:new, :edit])
+    end
+
+    resources "/recipes", RecipeController, except: [:new, :edit] do
       resources("/comments", CommentController, except: [:new, :edit])
     end
 
@@ -39,5 +44,11 @@ defmodule RealWorldWeb.Router do
     get("/profiles/:username", ProfileController, :show)
     post("/profiles/:username/follow", ProfileController, :follow)
     delete("/profiles/:username/follow", ProfileController, :unfollow)
+
+
+    ## Custom changes
+    get("/recipes", RecipeController, :index)
+
+
   end
 end
