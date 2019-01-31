@@ -1,4 +1,4 @@
-defmodule RealWorld.Blog.Ingredient do
+defmodule RealWorld.Cookbook.Ingredient do
   @moduledoc """
   The Ingredient Model
   """

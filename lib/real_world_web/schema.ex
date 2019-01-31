@@ -15,8 +15,18 @@ defmodule RealWorldWeb.Schema do
     end
 
     field :recipe, list_of(:recipe) do
-      arg(:ingredient, non_null(:string))
+      arg(:ingredients, list_of(:string))
+      arg(:name, :string)
       resolve(&Resolvers.RecipeResolver.find/2)
     end
+
+    field :user, :user do
+      arg(:email, non_null(:string))
+      resolve(&Resolvers.RecipeResolver.find_user_by_email/2)
+    end
+  end
+
+  def middleware(middleware, field, object) do
+    [RealWorld.TraceMiddleware | middleware]
   end
 end

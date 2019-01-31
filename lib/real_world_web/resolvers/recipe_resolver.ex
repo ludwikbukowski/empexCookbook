@@ -1,13 +1,34 @@
 defmodule RealworldWeb.Resolvers.RecipeResolver do
-  alias BlogAppGql.Accounts
+  alias CookbookAppGql.Accounts
 
   def all(_args, _info) do
-    {:ok, RealWorld.Blog.list_recipes(%{})}
+    RealWorld.Metrics.bump_one_lookup("lookups")
+    {:ok, RealWorld.Cookbook.list_recipes(%{})}
   end
 
-  def find(%{ingredient: ingredient}, _info) do
-    case RealWorld.Blog.get_recipe_by_ingredient(ingredient) do
-      nil -> {:error, "No recipes with #{ingredient}"}
+  def find(%{name: name}, _info) do
+    RealWorld.Metrics.bump_one_lookup("lookups")
+
+    case RealWorld.Cookbook.get_recipe_by_name(name) do
+      nil -> {:error, "No recipe with name #{name}"}
+      recipe -> {:ok, recipe}
+    end
+  end
+
+  def find(%{ingredients: list}, _info) do
+    RealWorld.Metrics.bump_one_lookup("lookups")
+
+    case RealWorld.Cookbook.get_recipe_by_ingredients(list) do
+      nil -> {:error, "No recipes with #{list}"}
+      recipe -> {:ok, recipe}
+    end
+  end
+
+  def find_user_by_email(%{email: email}, _info) do
+    RealWorld.Metrics.bump_one_lookup("lookups")
+
+    case RealWorld.Cookbook.get_user_by_email(email) do
+      nil -> {:error, "No Users with email #{email}"}
       recipe -> {:ok, recipe}
     end
   end

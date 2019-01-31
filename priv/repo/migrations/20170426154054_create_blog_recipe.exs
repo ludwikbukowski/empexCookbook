@@ -1,10 +1,11 @@
-defmodule RealWorld.Repo.Migrations.CreateRealWorld.Blog.Recipe do
+defmodule RealWorld.Repo.Migrations.CreateRealWorld.Cookbook.Recipe do
   use Ecto.Migration
 
   def change do
     create table(:recipes) do
       add(:title, :string)
       add(:body, :text)
+      add(:picture, :string)
       add(:slug, :string)
 
       timestamps(inserted_at: :created_at)

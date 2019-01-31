@@ -15,43 +15,42 @@ defmodule RealWorldWeb.Router do
     plug(Guardian.Plug.LoadResource, allow_blank: true)
   end
 
-  scope "/", RealWorldWeb do
+  pipeline :start_trace do
+    ## START TRACE
+    plug(
+      Spandex.Plug.StartTrace,
+      tracer: RealWorld.Tracing,
+      tracer_opts: [service: :phoenix, resource: :empex, name: "root_query"]
+    )
+
+    ## UPDATE TRACE
+    plug(RealWorldWeb.DatadogTraceUpdatePlug)
+  end
+
+  scope "/" do
     pipe_through(:api)
-    #        forward "/graphiql", Absinthe.Plug.GraphiQL, schema: DxPlatformWeb.Schema
+    pipe_through(:start_trace)
+    #    forward("/api", RealWorldWeb.DatadogTraceStartPlug, schema: RealWorldWeb.Schema)
+    forward("/graphiql", RealWorldWeb.AbsintheWithDatadogPlug, schema: RealWorldWeb.Schema)
 
-    #        forward "/graphql/schema", DxPlatformWeb.Plugs.APIDoc
+    get("/recipes/feed", RealWorldWeb.RecipeController, :feed)
 
-    get("/articles/feed", ArticleController, :feed)
-    get("/recipes/feed", RecipeController, :feed)
-
-    resources "/articles", ArticleController, except: [:new, :edit] do
-      resources("/comments", CommentController, except: [:new, :edit])
-    end
-
-    resources "/recipes", RecipeController, except: [:new, :edit] do
-      resources("/comments", CommentController, except: [:new, :edit])
+    resources "/recipes", RealWorldWeb.RecipeController, except: [:new, :edit] do
+      resources("/comments", RealWorldWeb.CommentController, except: [:new, :edit])
     end
 
     # to allow comments_path in test
-    resources("/comments", CommentController, except: [:new, :edit])
+    resources("/comments", RealWorldWeb.CommentController, except: [:new, :edit])
+    get("/user", RealWorldWeb.UserController, :current_user)
+    put("/user", RealWorldWeb.UserController, :update)
+    post("/users", RealWorldWeb.UserController, :create)
+    post("/users/login", RealWorldWeb.SessionController, :create)
 
-    post("/articles/:slug/favorite", ArticleController, :favorite)
-    delete("/articles/:slug/favorite", ArticleController, :unfavorite)
-
-    get("/tags", TagController, :index)
-    get("/user", UserController, :current_user)
-    put("/user", UserController, :update)
-    post("/users", UserController, :create)
-    post("/users/login", SessionController, :create)
-
-    get("/profiles/:username", ProfileController, :show)
-    post("/profiles/:username/follow", ProfileController, :follow)
-    delete("/profiles/:username/follow", ProfileController, :unfollow)
+    get("/profiles/:username", RealWorldWeb.ProfileController, :show)
+    post("/profiles/:username/follow", RealWorldWeb.ProfileController, :follow)
+    delete("/profiles/:username/follow", RealWorldWeb.ProfileController, :unfollow)
 
     ## Custom changes
-    get("/recipes", RecipeController, :index)
+    get("/recipes", RealWorldWeb.RecipeController, :index)
   end
-
-  forward("/api", Absinthe.Plug, schema: RealWorldWeb.Schema)
-  forward("/graphiql", Absinthe.Plug.GraphiQL, schema: RealWorldWeb.Schema)
 end

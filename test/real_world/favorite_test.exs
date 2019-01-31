@@ -1,8 +1,8 @@
-defmodule RealWorld.Blog.FavoriteTest do
+defmodule RealWorld.Cookbook.FavoriteTest do
   @moduledoc false
   use ExUnit.Case
   use RealWorld.DataCase
-  alias RealWorld.Blog.Favorite
+  alias RealWorld.Cookbook.Favorite
   import RealWorld.Factory
 
   describe "schema" do

@@ -1,4 +1,4 @@
-defmodule RealWorld.Blog.Recipe do
+defmodule RealWorld.Cookbook.Recipe do
   @moduledoc """
   The Recipe Model
   """
@@ -6,15 +6,16 @@ defmodule RealWorld.Blog.Recipe do
   use Ecto.Schema
   import Ecto.Changeset
   alias RealWorld.Accounts.User
-  alias RealWorld.Blog.{Recipe, Ingredient}
+  alias RealWorld.Cookbook.{Recipe, Ingredient}
 
   @timestamps_opts [type: :utc_datetime]
   @required_fields ~w(title body user_id)a
-  @optional_fields ~w(slug)a
+  @optional_fields ~w(slug picture)a
 
   schema "recipes" do
     field(:body, :string)
     field(:title, :string)
+    field(:picture, :string)
     field(:slug, :string)
 
     embeds_many(:ingredients, Ingredient)

@@ -1,8 +1,8 @@
 defmodule RealWorldWeb.CommentControllerTest do
   use RealWorldWeb.ConnCase
 
-  alias RealWorld.Blog
-  alias RealWorld.Blog.Comment
+  alias RealWorld.Cookbook
+  alias RealWorld.Cookbook.Comment
   import RealWorld.Factory
 
   @create_attrs %{body: "some body"}
@@ -10,7 +10,7 @@ defmodule RealWorldWeb.CommentControllerTest do
   @invalid_attrs %{body: nil}
 
   def fixture(:comment) do
-    {:ok, comment} = Blog.create_comment(@create_attrs)
+    {:ok, comment} = Cookbook.create_comment(@create_attrs)
     comment
   end
 

@@ -16,8 +16,8 @@ defmodule RealWorld.Accounts.User do
     field(:bio, :string)
     field(:image, :string)
 
-    has_many(:articles, RealWorld.Blog.Article)
-    has_many(:comments, RealWorld.Blog.Comment)
+    has_many(:recipes, RealWorld.Cookbook.Recipe)
+    has_many(:comments, RealWorld.Cookbook.Comment)
 
     timestamps(inserted_at: :created_at)
   end

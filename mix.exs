@@ -44,6 +44,7 @@ defmodule RealWorld.Mixfile do
       {:postgrex, "~> 0.13.3"},
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4"},
+      {:absinthe_ecto, "~> 0.1.3"},
       {:gettext, "~> 0.11"},
       {:proper_case, "~> 1.0.0"},
       {:cowboy, "~> 1.1"},
@@ -54,7 +55,18 @@ defmodule RealWorld.Mixfile do
       {:ex_machina, "~> 2.0", only: :test},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:plug, "~> 1.0"},
-      {:corsica, "~> 1.0"}
+      {:corsica, "~> 1.0"},
+      {:lager, "~> 3.5", override: true},
+      {:exometer_core, "~> 1.5.7", override: true},
+      {:exometer_report_statsd, github: "esl/exometer_report_statsd"},
+      {:elixometer, github: "pinterest/elixometer"},
+      {:decorator, git: "https://github.com/arjan/decorator", ref: "663bd40b54c2fc84"},
+      {:spandex, "~> 2.3.0"},
+      {:spandex_datadog, "~> 0.3.0"},
+      {:parse_trans, "3.2.0", override: true},
+      {:httpoison, "~> 1.2", override: true},
+      # mix issue:  we might need to change mix.lock to use rebar for setup
+      {:setup, "1.8.4", override: true, manager: :rebar, runtime: false}
     ]
   end
 

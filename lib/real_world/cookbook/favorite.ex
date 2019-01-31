@@ -1,4 +1,4 @@
-defmodule RealWorld.Blog.Favorite do
+defmodule RealWorld.Cookbook.Favorite do
   @moduledoc """
   The Favorite Model
   """
@@ -6,7 +6,7 @@ defmodule RealWorld.Blog.Favorite do
   use Ecto.Schema
   import Ecto.Changeset
   alias RealWorld.Accounts.User
-  alias RealWorld.Blog.{Article, Favorite}
+  alias RealWorld.Cookbook.{Article, Favorite}
 
   @required_fields ~w(user_id article_id)a
 

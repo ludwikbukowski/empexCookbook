@@ -27,6 +27,7 @@ defmodule RealWorldWeb.RecipeView do
       :id,
       :body,
       :title,
+      :picture,
       :slug,
       :author,
       :created_at,

@@ -7,12 +7,21 @@ defmodule RealWorld.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
+    opts = [
+      host: System.get_env("DATADOG_HOST") || "localhost",
+      port: System.get_env("DATADOG_PORT") || 8126,
+      batch_size: System.get_env("SPANDEX_BATCH_SIZE") || 1,
+      sync_threshold: System.get_env("SPANDEX_SYNC_THRESHOLD") || 100,
+      http: HTTPoison
+    ]
+
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
       supervisor(RealWorld.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(RealWorldWeb.Endpoint, [])
+      supervisor(RealWorldWeb.Endpoint, []),
+      worker(SpandexDatadog.ApiServer, [opts])
       # Start your own worker by calling: RealWorld.Worker.start_link(arg1, arg2, arg3)
       # worker(RealWorld.Worker, [arg1, arg2, arg3]),
     ]

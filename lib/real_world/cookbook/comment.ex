@@ -1,9 +1,9 @@
-defmodule RealWorld.Blog.Comment do
+defmodule RealWorld.Cookbook.Comment do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias RealWorld.Blog.Comment
-  alias RealWorld.Blog.Article
+  alias RealWorld.Cookbook.Comment
+  alias RealWorld.Cookbook.Article
   alias RealWorld.Accounts.User
 
   @timestamps_opts [type: :utc_datetime]

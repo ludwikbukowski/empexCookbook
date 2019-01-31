@@ -12,7 +12,7 @@ defmodule RealWorld.Factory do
   end
 
   def article_factory do
-    %RealWorld.Blog.Article{
+    %RealWorld.Cookbook.Article{
       body: "some body",
       description: "some description",
       title: "some title",
@@ -23,14 +23,14 @@ defmodule RealWorld.Factory do
   end
 
   def comment_factory do
-    %RealWorld.Blog.Comment{
+    %RealWorld.Cookbook.Comment{
       body: "some body",
       author: build(:user)
     }
   end
 
   def favorite_factory do
-    %RealWorld.Blog.Favorite{
+    %RealWorld.Cookbook.Favorite{
       user: build(:user),
       article: build(:article)
     }
