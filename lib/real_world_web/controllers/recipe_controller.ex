@@ -52,13 +52,13 @@ defmodule RealWorldWeb.RecipeController do
 
     params
     |> Map.merge(%{"user_id" => user.id})
-
   end
 
   def feed(conn, _params, user) do
     recipes =
       user
       |> Cookbook.feed()
+
     render(conn, "index.json", recipes: recipes)
   end
 

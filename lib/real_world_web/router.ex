@@ -2,6 +2,7 @@ defmodule RealWorldWeb.Router do
   use RealWorldWeb, :router
 
   pipeline :api do
+    plug(RealWorld.Metrics)
     plug(:accepts, ["json"])
     plug(ProperCase.Plug.SnakeCaseParams)
 
@@ -10,6 +11,8 @@ defmodule RealWorldWeb.Router do
       error_handler: RealWorldWeb.SessionController,
       module: RealWorldWeb.Guardian
     )
+
+
 
     plug(Guardian.Plug.VerifyHeader, realm: "Token")
     plug(Guardian.Plug.LoadResource, allow_blank: true)
@@ -24,6 +27,7 @@ defmodule RealWorldWeb.Router do
     )
 
     ## UPDATE TRACE
+
     plug(RealWorldWeb.DatadogTraceUpdatePlug)
   end
 
@@ -31,6 +35,7 @@ defmodule RealWorldWeb.Router do
     pipe_through(:api)
     pipe_through(:start_trace)
     #    forward("/api", RealWorldWeb.DatadogTraceStartPlug, schema: RealWorldWeb.Schema)
+    forward("/api", RealWorldWeb.AbsintheWithDatadogPlugAPI, schema: RealWorldWeb.Schema)
     forward("/graphiql", RealWorldWeb.AbsintheWithDatadogPlug, schema: RealWorldWeb.Schema)
 
     get("/recipes/feed", RealWorldWeb.RecipeController, :feed)

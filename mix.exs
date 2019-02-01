@@ -26,7 +26,10 @@ defmodule RealWorld.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {RealWorld.Application, []}, extra_applications: [:logger, :runtime_tools, :comeonin]]
+    [
+      mod: {RealWorld.Application, []},
+      extra_applications: [:logger, :runtime_tools, :comeonin, :statix]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -57,8 +60,10 @@ defmodule RealWorld.Mixfile do
       {:plug, "~> 1.0"},
       {:corsica, "~> 1.0"},
       {:lager, "~> 3.5", override: true},
-      {:exometer_core, "~> 1.5.7", override: true},
-      {:exometer_report_statsd, github: "esl/exometer_report_statsd"},
+      {:statix, ">= 0.0.0"},
+      {:cachex, "~> 3.1"},
+      #      {:exometer_core, "~> 1.5.7", override: true},
+      #      {:exometer_report_statsd, github: "esl/exometer_report_statsd"},
       {:elixometer, github: "pinterest/elixometer"},
       {:decorator, git: "https://github.com/arjan/decorator", ref: "663bd40b54c2fc84"},
       {:spandex, "~> 2.3.0"},

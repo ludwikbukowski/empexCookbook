@@ -5,10 +5,11 @@ defmodule RealWorld.Cookbook do
 
   import Ecto.Query, warn: false
   alias RealWorld.Repo
+  use RealWorld.Decorator
   alias RealWorld.Accounts.{User, UserFollower}
   alias RealWorld.Cookbook.{Recipe, NonVeganic, Comment, Favorite}
 
-  @default_pagination_limit 10
+  @default_pagination_limit 100
 
   def get_user_by_email(email) do
     from(u in User,
@@ -25,12 +26,24 @@ defmodule RealWorld.Cookbook do
   end
 
   def get_non_veganics() do
-        from(nv in NonVeganic)
-        |> Repo.all()
+    from(nv in NonVeganic)
+    |> Repo.all()
+  end
+
+  def get_non_veganics_with_cache() do
+    case Cachex.get(:my_cache, "non_veganics") do
+      {:ok, nil} ->
+        values = Repo.all(from(nv in NonVeganic))
+        Cachex.put(:my_cache, "non_veganics", values)
+        values
+
+      {:ok, res} ->
+        res
+    end
   end
 
   def list_recipes(params) do
-    limit = params["limit"] || @default_pagination_limit
+    limit = @default_pagination_limit
     offset = params["offset"] || 0
 
     from(a in Recipe, limit: ^limit, offset: ^offset, order_by: a.created_at)
@@ -44,13 +57,14 @@ defmodule RealWorld.Cookbook do
     |> Repo.one()
   end
 
-    def get_recipe_by_ingredients(list) do
-      Enum.reduce(list, Recipe, fn ingredient, acc  ->
+  def get_recipe_by_ingredients(list) do
+    Enum.reduce(list, Recipe, fn ingredient, acc ->
       from(r in acc,
         where: fragment("? <@ ANY(?)", ~s|{"name": "#{ingredient}"}|, r.ingredients)
-      ) end)
-      |> Repo.all()
-    end
+      )
+    end)
+    |> Repo.all()
+  end
 
   def filter_by_tags(query, nil) do
     query
@@ -203,6 +217,4 @@ defmodule RealWorld.Cookbook do
   def change_comment(%Comment{} = comment) do
     Comment.changeset(comment, %{})
   end
-
-
 end

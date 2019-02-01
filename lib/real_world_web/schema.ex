@@ -10,23 +10,31 @@ defmodule RealWorldWeb.Schema do
   import_types(RealWorldWeb.Schema.Scalars)
 
   query do
-    field :recipes, list_of(:recipe) do
-      resolve(&Resolvers.RecipeResolver.all/2)
+    field :recipe, :recipe do
+      arg(:name, :string, description: "The name of the recipe")
+      resolve(&Resolvers.RecipeResolver.find_by_name/2)
     end
 
-    field :recipe, list_of(:recipe) do
-      arg(:ingredients, list_of(:string))
-      arg(:name, :string)
-      resolve(&Resolvers.RecipeResolver.find/2)
+    field :recipes, list_of(:recipe) do
+      arg(:ingredients, list_of(:string),
+        description: "The required list of the ingredients of the recipe"
+      )
+
+      resolve(&Resolvers.RecipeResolver.find_by_ingredient_list/2)
     end
 
     field :user, :user do
       arg(:email, non_null(:string))
       resolve(&Resolvers.RecipeResolver.find_user_by_email/2)
     end
+
+    field :all_recipes, list_of(:recipe) do
+      resolve(&Resolvers.RecipeResolver.all/2)
+    end
   end
 
   def middleware(middleware, field, object) do
     [RealWorld.TraceMiddleware | middleware]
+#    middleware
   end
 end

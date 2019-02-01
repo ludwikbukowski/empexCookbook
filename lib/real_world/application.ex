@@ -6,6 +6,7 @@ defmodule RealWorld.Application do
   # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec
+    :ok = RealWorld.Metrics.connect()
 
     opts = [
       host: System.get_env("DATADOG_HOST") || "localhost",
@@ -19,6 +20,7 @@ defmodule RealWorld.Application do
     children = [
       # Start the Ecto repository
       supervisor(RealWorld.Repo, []),
+      worker(Cachex, [:my_cache, []]),
       # Start the endpoint when the application starts
       supervisor(RealWorldWeb.Endpoint, []),
       worker(SpandexDatadog.ApiServer, [opts])
