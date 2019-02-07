@@ -1,4 +1,4 @@
-defmodule RealWorld.DataCase do
+defmodule EmpexCookbook.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule RealWorld.DataCase do
 
   using do
     quote do
-      alias RealWorld.Repo
+      alias EmpexCookbook.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import RealWorld.DataCase
+      import EmpexCookbook.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(RealWorld.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EmpexCookbook.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(RealWorld.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(EmpexCookbook.Repo, {:shared, self()})
     end
 
     :ok

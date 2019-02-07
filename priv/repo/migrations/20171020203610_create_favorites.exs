@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.CreateFavorites do
+defmodule EmpexCookbook.Repo.Migrations.CreateFavorites do
   use Ecto.Migration
 
   def change do

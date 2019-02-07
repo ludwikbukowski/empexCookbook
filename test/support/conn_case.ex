@@ -1,4 +1,4 @@
-defmodule RealWorldWeb.ConnCase do
+defmodule EmpexCookbookWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,18 +19,18 @@ defmodule RealWorldWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      import RealWorldWeb.Router.Helpers
+      import EmpexCookbookWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint RealWorldWeb.Endpoint
+      @endpoint EmpexCookbookWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(RealWorld.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EmpexCookbook.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(RealWorld.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(EmpexCookbook.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

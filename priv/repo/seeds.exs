@@ -1,8 +1,8 @@
-defmodule RealWorld.DatabaseSeeder do
-  alias RealWorld.Repo
-  alias RealWorld.Cookbook.NonVeganic
-  alias RealWorld.Cookbook.Recipe
-  alias RealWorld.Cookbook.Ingredient
+defmodule EmpexCookbook.DatabaseSeeder do
+  alias EmpexCookbook.Repo
+  alias EmpexCookbook.Cookbook.NonVeganic
+  alias EmpexCookbook.Cookbook.Recipe
+  alias EmpexCookbook.Cookbook.Ingredient
 
   def insert_nonveganic(i) do
     Repo.insert!(%NonVeganic{
@@ -14,10 +14,10 @@ defmodule RealWorld.DatabaseSeeder do
     Repo.insert!(%Recipe{
       title: "pasta al ragu",
       ingredients: [
-        %RealWorld.Cookbook.Ingredient{
+        %EmpexCookbook.Cookbook.Ingredient{
           name: "pasta"
         },
-        %RealWorld.Cookbook.Ingredient{
+        %EmpexCookbook.Cookbook.Ingredient{
           name: "onion"
         }
       ],
@@ -58,6 +58,6 @@ nonveganics = [
 ]
 
 Enum.reduce(1..2000, nonveganics, fn _, acc -> acc ++ nonveganics end)
-|> Enum.each(fn i -> RealWorld.DatabaseSeeder.insert_nonveganic(i) end)
+|> Enum.each(fn i -> EmpexCookbook.DatabaseSeeder.insert_nonveganic(i) end)
 
 

@@ -6,22 +6,22 @@
 use Mix.Config
 
 # General application configuration
-config :real_world, ecto_repos: [RealWorld.Repo]
+config :empex_cookbook, ecto_repos: [EmpexCookbook.Repo]
 
 # Configures the endpoint
-config :real_world, RealWorldWeb.Endpoint,
+config :empex_cookbook, EmpexCookbookWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "9ueg5YcX8/LKzVUcDrXp5xpYuaBCUfZZAJ3/udC1LCoabotR3O1CJyf/u/6RLJ/N",
-  render_errors: [view: RealWorldWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: RealWorld.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: EmpexCookbookWeb.ErrorView, accepts: ~w(json)],
+  pubsub: [name: EmpexCookbook.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :real_world, RealWorldWeb.Guardian,
-  issuer: "RealWorld",
+config :empex_cookbook, EmpexCookbookWeb.Guardian,
+  issuer: "EmpexCookbook",
   secret_key: "MDLMflIpKod5YCnkdiY7C4E3ki2rgcAAMwfBl0+vyC5uqJNgoibfQmAh7J3uZWVK",
   # optional
   allowed_algos: ["HS256"],

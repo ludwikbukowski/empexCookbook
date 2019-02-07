@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.RenameFollowerIdToFolloweeId do
+defmodule EmpexCookbook.Repo.Migrations.RenameFollowerIdToFolloweeId do
   use Ecto.Migration
 
   def change do

@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.AddCascadeDeleteToFavorites do
+defmodule EmpexCookbook.Repo.Migrations.AddCascadeDeleteToFavorites do
   use Ecto.Migration
 
   def up do

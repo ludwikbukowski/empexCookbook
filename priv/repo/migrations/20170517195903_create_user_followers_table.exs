@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.CreateUserFollowersTable do
+defmodule EmpexCookbook.Repo.Migrations.CreateUserFollowersTable do
   @moduledoc false
   use Ecto.Migration
 

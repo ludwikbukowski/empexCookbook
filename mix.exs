@@ -1,9 +1,9 @@
-defmodule RealWorld.Mixfile do
+defmodule EmpexCookbook.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :real_world,
+      app: :empex_cookbook,
       version: "0.0.1",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -14,11 +14,11 @@ defmodule RealWorld.Mixfile do
       test_coverage: [tool: ExCoveralls],
 
       # Docs
-      name: "RealWorld Example App",
-      source_url: "https://github.com/gothinkster/elixir-phoenix-realworld-example-app",
-      homepage_url: "https://github.com/gothinkster/elixir-phoenix-realworld-example-app",
+      name: "EmpexCookbook Example App",
+      source_url: "https://github.com/gothinkster/elixir-phoenix-EmpexCookbook-example-app",
+      homepage_url: "https://github.com/gothinkster/elixir-phoenix-EmpexCookbook-example-app",
       # The main page in the docs
-      docs: [main: "RealWorld Example App", logo: "logo.png", extras: ["README.md"]]
+      docs: [main: "EmpexCookbook Example App", logo: "logo.png", extras: ["README.md"]]
     ]
   end
 
@@ -27,7 +27,7 @@ defmodule RealWorld.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {RealWorld.Application, []},
+      mod: {EmpexCookbook.Application, []},
       extra_applications: [:logger, :runtime_tools, :comeonin, :statix]
     ]
   end

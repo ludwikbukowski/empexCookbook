@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :real_world, RealWorldWeb.Endpoint,
+config :empex_cookbook, EmpexCookbookWeb.Endpoint,
   http: [port: 4001],
   server: false
 
@@ -10,10 +10,10 @@ config :real_world, RealWorldWeb.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :real_world, RealWorld.Repo,
+config :empex_cookbook, EmpexCookbook.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "real_world_test",
+  database: "empex_cookbook_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

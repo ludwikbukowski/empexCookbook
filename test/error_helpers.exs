@@ -1,4 +1,4 @@
-defmodule RealWorld.ErrorHelpers do
+defmodule EmpexCookbook.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

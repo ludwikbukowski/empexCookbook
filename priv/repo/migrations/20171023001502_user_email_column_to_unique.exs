@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.UserEmailColumnToUnique do
+defmodule EmpexCookbook.Repo.Migrations.UserEmailColumnToUnique do
   use Ecto.Migration
 
   def change do

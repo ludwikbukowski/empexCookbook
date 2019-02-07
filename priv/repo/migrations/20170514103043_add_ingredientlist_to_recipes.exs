@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.AddIngredientlistToRecipes do
+defmodule EmpexCookbook.Repo.Migrations.AddIngredientlistToRecipes do
   use Ecto.Migration
 
   def change do

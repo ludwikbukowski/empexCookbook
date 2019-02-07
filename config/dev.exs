@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :real_world, RealWorldWeb.Endpoint,
+config :empex_cookbook, EmpexCookbookWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -37,16 +37,16 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :real_world, RealWorld.Repo,
+config :empex_cookbook, EmpexCookbook.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "realworld",
+  database: "EmpexCookbook",
   hostname: "localhost",
   pool_size: 10,
   loggers: [
-    {RealWorld.Metrics, :record_metric, []},
-    {RealWorld.EctoInstrument, :trace, []}
+    {EmpexCookbook.Metrics, :record_metric, []},
+    {EmpexCookbook.EctoInstrument, :trace, []}
   ]
 
 config :statix,
@@ -74,7 +74,7 @@ config :statix,
 #    ]
 #  ]
 
-config :datadog, RealWorld.Tracing,
+config :datadog, EmpexCookbook.Tracing,
   service: :empex_metrics,
   adapter: SpandexDatadog.Adapter,
   disabled?: false,

@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.AddUniqueIndexToFavorite do
+defmodule EmpexCookbook.Repo.Migrations.AddUniqueIndexToFavorite do
   use Ecto.Migration
 
   def change do

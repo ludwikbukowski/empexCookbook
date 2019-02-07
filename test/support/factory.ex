@@ -1,8 +1,8 @@
-defmodule RealWorld.Factory do
-  use ExMachina.Ecto, repo: RealWorld.Repo
+defmodule EmpexCookbook.Factory do
+  use ExMachina.Ecto, repo: EmpexCookbook.Repo
 
   def user_factory do
-    %RealWorld.Accounts.User{
+    %EmpexCookbook.Accounts.User{
       email: "john@jacob.com",
       username: "john",
       password: "some password",
@@ -12,7 +12,7 @@ defmodule RealWorld.Factory do
   end
 
   def article_factory do
-    %RealWorld.Cookbook.Article{
+    %EmpexCookbook.Cookbook.Article{
       body: "some body",
       description: "some description",
       title: "some title",
@@ -23,14 +23,14 @@ defmodule RealWorld.Factory do
   end
 
   def comment_factory do
-    %RealWorld.Cookbook.Comment{
+    %EmpexCookbook.Cookbook.Comment{
       body: "some body",
       author: build(:user)
     }
   end
 
   def favorite_factory do
-    %RealWorld.Cookbook.Favorite{
+    %EmpexCookbook.Cookbook.Favorite{
       user: build(:user),
       article: build(:article)
     }

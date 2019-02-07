@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.AddTaglistToArticles do
+defmodule EmpexCookbook.Repo.Migrations.AddTaglistToArticles do
   use Ecto.Migration
 
   def change do

@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.CreateRealWorld.Cookbook.Recipe do
+defmodule EmpexCookbook.Repo.Migrations.CreateEmpexCookbook.Cookbook.Recipe do
   use Ecto.Migration
 
   def change do

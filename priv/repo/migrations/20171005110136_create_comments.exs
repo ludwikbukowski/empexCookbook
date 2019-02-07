@@ -1,4 +1,4 @@
-defmodule RealWorld.Repo.Migrations.CreateComments do
+defmodule EmpexCookbook.Repo.Migrations.CreateComments do
   use Ecto.Migration
 
   def change do

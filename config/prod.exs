@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :real_world, RealWorldWeb.Endpoint,
+config :empex_cookbook, EmpexCookbookWeb.Endpoint,
   load_from_system_env: true,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "https://real-world-example.herokuapp.com/", port: 443],
@@ -9,7 +9,7 @@ config :real_world, RealWorldWeb.Endpoint,
 
 config :logger, level: :info
 
-config :real_world, RealWorld.Repo,
+config :empex_cookbook, EmpexCookbook.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
