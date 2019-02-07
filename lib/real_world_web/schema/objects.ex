@@ -46,7 +46,7 @@ defmodule RealWorldWeb.Schema.Objects do
     bin_names = bin_ingredients_names(recipe)
 
     non_veganics =
-      Cookbook.get_non_veganics()
+      Cookbook.get_non_veganics_with_cache()
       |> Enum.map(fn i -> i.name end)
 
     not Enum.any?(bin_names, fn ingredient -> Enum.member?(non_veganics, ingredient) end)

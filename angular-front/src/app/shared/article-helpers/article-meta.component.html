@@ -1,0 +1,17 @@
+<div class="article-meta">
+  <a [routerLink]="['/profile', recipe.author.username]">
+    <img [src]="recipe.author.image" />
+  </a>
+
+  <div class="info">
+    <a class="author"
+      [routerLink]="['/profile', recipe.author.username]">
+      {{ recipe.author.username }}
+    </a>
+    <span class="date">
+      {{ recipe.createdAt | date: 'longDate' }}
+    </span>
+  </div>
+
+  <ng-content></ng-content>
+</div>

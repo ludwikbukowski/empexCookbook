@@ -1,0 +1,60 @@
+<div class="recipe-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+
+        <app-list-errors [errors]="errors"></app-list-errors>
+
+        <form [formGroup]="recipeForm">
+          <fieldset [disabled]="isSubmitting">
+
+            <fieldset class="form-group">
+              <input class="form-control form-control-lg"
+                formControlName="title"
+                type="text"
+                placeholder="Recipe Title" />
+            </fieldset>
+
+
+            <fieldset class="form-group">
+              <textarea class="form-control"
+                formControlName="body"
+                rows="8"
+                placeholder="Recipe body">
+              </textarea>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <input class="form-control"
+                     type="text"
+                     placeholder="optional URL of recipe picture"
+                     formControlName="picture" />
+
+            </fieldset>
+
+            <fieldset>
+              <form (submit)="addIngredient()">
+                <input type="text" [(ngModel)]="txtName" name="Name">
+                <button type="submit">Add Ingredient</button>
+              </form>
+
+              <ul>
+                <li *ngFor="let ingredient of ingredients">
+                  <span>{{ingredient.name}}</span>
+                  <button (click) = "deleteIngredient(ingredient.name)">x</button>
+                </li>
+              </ul>
+            </fieldset>
+
+
+            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+              Publish Recipe
+            </button>
+
+          </fieldset>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

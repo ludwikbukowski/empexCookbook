@@ -51,10 +51,13 @@ nonveganics = [
   "pasta",
   "latose",
   "white cheese",
-  "white bread"
+  "white bread",
+  "tomato purée", "red wine", "beef stock", "worcestershire sauce",
+  "red capsicum", "bulbs", "semi sundried tomatoes",  "small celeriac",
+  "chives", "tub creme fraiche", "horseradish sauce", "litre vegetable stock"
 ]
 
 Enum.reduce(1..2000, nonveganics, fn _, acc -> acc ++ nonveganics end)
 |> Enum.each(fn i -> RealWorld.DatabaseSeeder.insert_nonveganic(i) end)
 
-RealWorld.DatabaseSeeder.insert_recipe()
+

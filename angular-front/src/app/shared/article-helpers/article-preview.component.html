@@ -1,0 +1,18 @@
+<div class="article-preview">
+  <app-article-meta [recipe]="recipe">
+
+  </app-article-meta>
+
+  <a [routerLink]="['/recipe', recipe.slug]" class="preview-link">
+    <table>
+      <tr>
+        <th><img   width="70" height="70"  class="avatar" [src]="recipe.picture" class="user-img" /></th>
+        <th>
+
+          <h1>{{ recipe.title }}</h1>
+          <span>Read more...</span>
+        </th>
+      </tr>
+  </table>
+  </a>
+</div>

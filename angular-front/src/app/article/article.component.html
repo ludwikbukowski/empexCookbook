@@ -1,0 +1,100 @@
+<div class="article-page">
+
+  <div class="banner">
+    <div class="container">
+      <table>
+        <tr>
+          <th><img   width="100" height="100"  class="avatar" [src]="recipe.picture" class="user-img" /></th>
+          <th>
+            <h1>  {{ recipe.title }}</h1>
+          </th>
+        </tr>
+      </table>
+
+      <app-article-meta [recipe]="recipe">
+
+          <span [hidden]="!canModify">
+          <a class="btn btn-sm btn-outline-secondary"
+             [routerLink]="['/create', recipe.slug]">
+            <i class="ion-edit"></i> Edit Recipe
+          </a>
+
+          <button class="btn btn-sm btn-outline-danger"
+            [ngClass]="{disabled: isDeleting}"
+            (click)="deleteArticle()">
+            <i class="ion-trash-a"></i> Delete Recipe
+          </button>
+        </span>
+
+        <span [hidden]="canModify">
+          <app-follow-button
+            [profile]="recipe.author"
+            (toggle)="onToggleFollowing($event)">
+          </app-follow-button>
+
+        </span>
+
+      </app-article-meta>
+    </div>
+  </div>
+
+  <div class="container page">
+
+    <div class="row article-content">
+      <div class="col-md-12">
+
+        <div [innerHTML]="recipe.body | markdown"></div>
+
+        <ul class="tag-list">
+          <li *ngFor="let i of recipe.ingredients"
+            class="tag-default tag-pill tag-outline">
+            <h6>{{ i }}</h6>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <hr />
+
+
+
+    <div class="row">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+
+        <div *appShowAuthed="true">
+          <app-list-errors [errors]="commentFormErrors"></app-list-errors>
+          <form class="card comment-form" (ngSubmit)="addComment()">
+            <fieldset [disabled]="isSubmitting">
+              <div class="card-block">
+                <textarea class="form-control"
+                  placeholder="Write a comment..."
+                  rows="3"
+                  [formControl]="commentControl"
+                ></textarea>
+              </div>
+              <div class="card-footer">
+                <img [src]="currentUser.image" class="comment-author-img" />
+                <button class="btn btn-sm btn-primary" type="submit">
+                 Post Comment
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
+        <div *appShowAuthed="false">
+          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this recipe.
+        </div>
+
+        <app-article-comment
+          *ngFor="let comment of comments"
+          [comment]="comment"
+          (deleteComment)="onDeleteComment(comment)">
+        </app-article-comment>
+
+      </div>
+    </div>
+
+  </div>
+</div>
