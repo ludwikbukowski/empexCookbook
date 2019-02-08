@@ -23,7 +23,7 @@ $ mix phx.server
 From now on, you can navigate to http://localhost:4000/graphiql and send Graphql queries
 
 # Frontend application
-Remeber to run backend first (previous section). Then, run:
+Remeber to run backend first in another session (previous section). Then, run:
 ```
 $ cd angular-front
 $ npm install
