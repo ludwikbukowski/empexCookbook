@@ -12,12 +12,12 @@ $ docker run --name empex -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
 ```
 Setup ecto:
 ```
+$ mix deps.get
 $ mix ecto.create
 $ mix ecto.migrate
 ```
 Run application:
 ```
-$ mix deps.get
 $ mix phx.server
 ```
 From now on, you can navigate to http://localhost:4000/graphiql and send Graphql queries
