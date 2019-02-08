@@ -20,6 +20,7 @@ Run application:
 $ mix deps.get
 $ mix phx.server
 ```
+From now on, you can navigate to http://localhost:4000/graphiql and send Graphql queries
 
 # Frontend application
 Run:
@@ -29,4 +30,4 @@ $ npm install
 $ ng serve
 ```
 and navigate to http://localhost:4200/
-Now you can create and remove recipes.
+Now you can create and remove recipes using dashboard
