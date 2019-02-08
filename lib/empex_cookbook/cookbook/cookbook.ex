@@ -29,7 +29,8 @@ defmodule EmpexCookbook.Cookbook do
     from(nv in NonVeganic)
     |> Repo.all()
   end
-
+ 
+  @decorate tracer(:cache)
   def get_non_veganics_with_cache() do
     case Cachex.get(:my_cache, "non_veganics") do
       {:ok, nil} ->
